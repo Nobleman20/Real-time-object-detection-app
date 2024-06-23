@@ -38,12 +38,12 @@ function MainPage() {
       webcamRef.current.video.readyState === 4 &&
       netRef.current
     ) {
-      const video = webcamRef.current.video;
+      const video = webcamRef.current.video as HTMLVideoElement;
       const videoWidth = video.videoWidth;
       const videoHeight = video.videoHeight;
 
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
+      video.width = videoWidth; // Directly set width and height
+      video.height = videoHeight;
 
       if (canvasRef.current) {
         canvasRef.current.width = videoWidth;
@@ -53,8 +53,8 @@ function MainPage() {
         console.log(obj);
 
         const ctx = canvasRef.current.getContext("2d");
-        if (ctx) {
-          drawRect(obj, ctx);
+        if (ctx && obj) {
+          drawRect(obj, ctx); // Pass obj and ctx to drawRect function
         }
       }
     }
@@ -96,7 +96,7 @@ function MainPage() {
             {showWebcam && (
               <div className={styles.webcamContainer}>
                 <Webcam
-                  ref={webcamRef as any} // Cast webcamRef to any to avoid type error
+                  ref={webcamRef}
                   muted={true}
                   style={{
                     width: "100%",
