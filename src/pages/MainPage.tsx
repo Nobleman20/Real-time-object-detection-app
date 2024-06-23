@@ -16,7 +16,7 @@ import monitorImage from "../images/monitor-recorder.png";
 
 function MainPage() {
   const [showWebcam, setShowWebcam] = useState(false);
-  const webcamRef = useRef<Webcam>(null);
+  const webcamRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const netRef = useRef<cocossd.ObjectDetection | null>(null);
 
