@@ -38,7 +38,7 @@ function MainPage() {
       webcamRef.current.video.readyState === 4 &&
       netRef.current
     ) {
-      const video = webcamRef.current.video;
+      const video = webcamRef.current.video as HTMLVideoElement;
       const videoWidth = video.videoWidth;
       const videoHeight = video.videoHeight;
 
