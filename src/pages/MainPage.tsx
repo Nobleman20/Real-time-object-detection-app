@@ -31,7 +31,7 @@ function MainPage() {
     netRef.current = await cocossd.load();
   }, []);
 
-  const detect = async () => {
+  const detect = useCallback(async () => {
     if (
       webcamRef.current &&
       webcamRef.current.video &&
@@ -42,8 +42,8 @@ function MainPage() {
       const videoWidth = video.videoWidth;
       const videoHeight = video.videoHeight;
 
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
+      video.width = videoWidth; // Directly set width and height
+      video.height = videoHeight;
 
       if (canvasRef.current) {
         canvasRef.current.width = videoWidth;
@@ -53,12 +53,12 @@ function MainPage() {
         console.log(obj);
 
         const ctx = canvasRef.current.getContext("2d");
-        if (ctx) {
-          drawRect(obj, ctx);
+        if (ctx && obj) {
+          drawRect(obj, ctx); // Pass obj and ctx to drawRect function
         }
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (showWebcam) {
@@ -71,7 +71,7 @@ function MainPage() {
 
       return () => clearInterval(interval); // Cleanup interval on component unmount
     }
-  }, [showWebcam, setupBackend, loadModel]);
+  }, [showWebcam, setupBackend, loadModel, detect]);
 
   return (
     <div>
@@ -80,15 +80,14 @@ function MainPage() {
         <h2 className={styles.title}>System check</h2>
         <p className={styles.content}>
           We utilize your camera image to ensure fairness for all participants,
-          and we also employ both your camera and microphone for a video
-          questions where you will be prompted to record a response using your
-          camera or webcam, so it's essential to verify that your camera and
-          microphone are functioning correctly and that you have a stable
-          internet connection. To do this, please position yourself in front of
-          your camera, ensuring that your entire face is clearly visible on the
-          screen. This includes your forehead, eyes, ears, nose, and lips. You
-          can initiate a 5-second recording of yourself by clicking the button
-          below.
+          and we also employ both your camera and microphone for video questions
+          where you will be prompted to record a response using your camera or
+          webcam. It's essential to verify that your camera and microphone are
+          functioning correctly and that you have a stable internet connection.
+          Please position yourself in front of your camera, ensuring that your
+          entire face is clearly visible on the screen. This includes your
+          forehead, eyes, ears, nose, and lips. You can initiate a 5-second
+          recording of yourself by clicking the button below.
         </p>
       </div>
       <div className={styles.picturesection}>
@@ -104,7 +103,6 @@ function MainPage() {
                     height: "100%",
                   }}
                 />
-
                 <canvas
                   ref={canvasRef}
                   style={{
@@ -126,30 +124,30 @@ function MainPage() {
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={monitorImage}
-            altIcon="Webcam"
-            altStatus="status"
-            feature="Webcam"
+            altIcon="Monitor"
+            altStatus="Status"
+            feature="Monitor"
           />
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={WifiImage}
             altIcon="Wifi"
-            altStatus="status"
-            feature="Webcam"
+            altStatus="Status"
+            feature="Wifi"
           />
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={monitorImage}
             altIcon="Webcam"
-            altStatus="status"
+            altStatus="Status"
             feature="Webcam"
           />
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={IconImage}
-            altIcon="Webcam"
-            altStatus="status"
-            feature="Webcam"
+            altIcon="Icon"
+            altStatus="Status"
+            feature="Icon"
           />
         </div>
       </div>
