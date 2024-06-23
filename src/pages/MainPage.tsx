@@ -9,6 +9,10 @@ import "@tensorflow/tfjs-backend-cpu";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import { drawRect } from "../utilities";
+import statusImage from "../images/round.png";
+import IconImage from "../images/lamp-charge.png";
+import WifiImage from "../images/wifi.svg";
+import monitorImage from "../images/monitor-recorder.png";
 
 function MainPage() {
   const [showWebcam, setShowWebcam] = useState(false);
@@ -119,10 +123,34 @@ function MainPage() {
           </button>
         </div>
         <div className={styles.photofeatures}>
-          <PhotoMenu />
-          <PhotoMenu />
-          <PhotoMenu />
-          <PhotoMenu />
+          <PhotoMenu
+            imgStatus={statusImage}
+            imgIcon={monitorImage}
+            altIcon="Webcam"
+            altStatus="status"
+            feature="Webcam"
+          />
+          <PhotoMenu
+            imgStatus={statusImage}
+            imgIcon={WifiImage}
+            altIcon="Wifi"
+            altStatus="status"
+            feature="Webcam"
+          />
+          <PhotoMenu
+            imgStatus={statusImage}
+            imgIcon={monitorImage}
+            altIcon="Webcam"
+            altStatus="status"
+            feature="Webcam"
+          />
+          <PhotoMenu
+            imgStatus={statusImage}
+            imgIcon={IconImage}
+            altIcon="Webcam"
+            altStatus="status"
+            feature="Webcam"
+          />
         </div>
       </div>
       <Footer />
