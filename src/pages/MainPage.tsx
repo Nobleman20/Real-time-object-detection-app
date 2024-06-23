@@ -124,30 +124,30 @@ function MainPage() {
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={monitorImage}
-            altIcon="webcam status"
+            altIcon="Monitor"
             altStatus="Status"
             feature="Monitor"
           />
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={WifiImage}
-            altIcon="speed status"
+            altIcon="Wifi"
             altStatus="Status"
-            feature="Speed"
+            feature="Wifi"
           />
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={monitorImage}
-            altIcon="Gadjet mic status"
+            altIcon="Webcam"
             altStatus="Status"
-            feature="Gadjet mic"
+            feature="Webcam"
           />
           <PhotoMenu
             imgStatus={statusImage}
             imgIcon={IconImage}
-            altIcon="Lighting status"
+            altIcon="Icon"
             altStatus="Status"
-            feature="Lighting"
+            feature="Icon"
           />
         </div>
       </div>

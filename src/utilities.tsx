@@ -1,7 +1,7 @@
-import { ObjectDetection } from "@tensorflow-models/coco-ssd";
+import { DetectedObject } from "@tensorflow-models/coco-ssd";
 
 export const drawRect = (
-  detections: ObjectDetection[],
+  detections: DetectedObject[],
   ctx: CanvasRenderingContext2D | null
 ) => {
   detections.forEach((prediction) => {
