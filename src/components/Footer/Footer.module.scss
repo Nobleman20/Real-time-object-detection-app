@@ -1,0 +1,17 @@
+@import "../../variables.scss";
+
+.footerdiv {
+  margin-left: 105px;
+  display: flex;
+}
+
+.footer {
+  color: $menu-background;
+  font-size: $small;
+  margin-right: 8px;
+}
+
+.getlink {
+  color: $body-color;
+  font-size: $medium;
+}

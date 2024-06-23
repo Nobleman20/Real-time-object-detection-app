@@ -1,0 +1,62 @@
+@import "../variables.scss";
+
+.mainpage {
+  margin-left: 312px;
+  margin-bottom: 8px;
+}
+
+.title {
+  color: $black;
+}
+
+.content {
+  color: $body-color;
+  max-width: 721px;
+  margin-bottom: 30px;
+}
+
+.frame {
+  border-top: 2px solid $primary-color;
+  border-right: 2px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
+  border-left: 2px solid $primary-color;
+  border-radius: 10px;
+  width: 275px;
+  height: 168px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.webcamContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.picturesection {
+  margin-left: 312px;
+  display: flex;
+}
+
+.pictureframe {
+  margin-right: 32px;
+}
+
+.photofeatures {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  background-color: grey;
+}
+
+.button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  width: 207px;
+  height: 44px;
+  border-radius: 8px;
+  margin-bottom: 142px;
+}

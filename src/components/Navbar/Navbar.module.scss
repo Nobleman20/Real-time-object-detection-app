@@ -1,0 +1,47 @@
+@import "../../variables.scss";
+
+.navbar {
+  display: flex;
+  margin-left: 105px;
+  margin-top: 24px;
+  margin-right: 86px;
+}
+
+.logoimage {
+  background-color: rgb(77, 204, 77);
+  margin-right: 12px;
+  width: 63px;
+  height: 63px;
+  margin-bottom: 72px;
+}
+
+.logotitle {
+  margin-right: 743px;
+}
+
+.navheading {
+  display: flex;
+}
+
+.title {
+  color: $black;
+  font-size: $large;
+
+  margin-top: 10px;
+  margin-bottom: -15px;
+}
+
+.subtitle {
+  color: $light-grey;
+  font-size: $small;
+}
+
+.time {
+  color: $primary-color;
+  background-color: $menu-background;
+  font-size: $medium;
+}
+
+.timeleft {
+  font-size: $small;
+}
