@@ -16,7 +16,7 @@ import monitorImage from "../images/monitor-recorder.png";
 
 function MainPage() {
   const [showWebcam, setShowWebcam] = useState(false);
-  const webcamRef = useRef<Webcam>(null);
+  const webcamRef = useRef<Webcam & HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const netRef = useRef<cocossd.ObjectDetection | null>(null);
 
@@ -34,7 +34,6 @@ function MainPage() {
   const detect = useCallback(async () => {
     if (
       webcamRef.current &&
-      webcamRef.current.video &&
       webcamRef.current.video.readyState === 4 &&
       netRef.current
     ) {
@@ -42,8 +41,8 @@ function MainPage() {
       const videoWidth = video.videoWidth;
       const videoHeight = video.videoHeight;
 
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
+      video.width = videoWidth; // Directly set width and height
+      video.height = videoHeight;
 
       if (canvasRef.current) {
         canvasRef.current.width = videoWidth;
@@ -54,7 +53,7 @@ function MainPage() {
 
         const ctx = canvasRef.current.getContext("2d");
         if (ctx) {
-          drawRect(obj, ctx);
+          drawRect(obj, ctx); // Pass obj and ctx to drawRect function
         }
       }
     }
@@ -92,25 +91,30 @@ function MainPage() {
       </div>
       <div className={styles.picturesection}>
         <div className={styles.pictureframe}>
-          {showWebcam && (
-            <div className={styles.webcamContainer}>
-              <Webcam
-                ref={webcamRef}
-                muted={true}
-                style={{ width: "100%", height: "100%" }}
-              />
-              <canvas
-                ref={canvasRef}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-          )}
+          <div className={styles.frame}>
+            {showWebcam && (
+              <div className={styles.webcamContainer}>
+                <Webcam
+                  ref={webcamRef}
+                  muted={true}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+                <canvas
+                  ref={canvasRef}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
+            )}
+          </div>
           <button className={styles.button} onClick={() => setShowWebcam(true)}>
             Take picture and continue
           </button>
