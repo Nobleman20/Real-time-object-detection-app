@@ -1,11 +1,11 @@
-/* eslint-disable */
-
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import PhotoMenu from "../components/PhotoMenu/PhotoMenu";
 import styles from "./MainPage.module.scss";
 import * as tf from "@tensorflow/tfjs";
+import "@tensorflow/tfjs-backend-webgl";
+import "@tensorflow/tfjs-backend-cpu";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import { drawRect } from "../utilities";
@@ -14,18 +14,25 @@ function MainPage() {
   const [showWebcam, setShowWebcam] = useState(false);
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const netRef = useRef<cocossd.ObjectDetection | null>(null);
 
-  // Main function to load the model and start detection
-  const runCoco = async () => {
-    const net = await cocossd.load();
-    detect(net);
-  };
+  // Initialize TensorFlow.js backend
+  const setupBackend = useCallback(async () => {
+    await tf.setBackend("webgl");
+    await tf.ready();
+  }, []);
 
-  const detect = async (net: cocossd.ObjectDetection) => {
+  // Main function to load the model
+  const loadModel = useCallback(async () => {
+    netRef.current = await cocossd.load();
+  }, []);
+
+  const detect = async () => {
     if (
       webcamRef.current &&
       webcamRef.current.video &&
-      webcamRef.current.video.readyState === 4
+      webcamRef.current.video.readyState === 4 &&
+      netRef.current
     ) {
       const video = webcamRef.current.video;
       const videoWidth = video.videoWidth;
@@ -38,7 +45,7 @@ function MainPage() {
         canvasRef.current.width = videoWidth;
         canvasRef.current.height = videoHeight;
 
-        const obj = await net.detect(video);
+        const obj = await netRef.current.detect(video);
         console.log(obj);
 
         const ctx = canvasRef.current.getContext("2d");
@@ -51,14 +58,16 @@ function MainPage() {
 
   useEffect(() => {
     if (showWebcam) {
-      runCoco();
+      setupBackend();
+      loadModel();
+
       const interval = setInterval(() => {
-        runCoco();
+        detect();
       }, 100); // Adjust the interval time as needed
 
       return () => clearInterval(interval); // Cleanup interval on component unmount
     }
-  }, [showWebcam]);
+  }, [showWebcam, setupBackend, loadModel]);
 
   return (
     <div>
