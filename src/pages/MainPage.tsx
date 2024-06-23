@@ -34,10 +34,11 @@ function MainPage() {
   const detect = useCallback(async () => {
     if (
       webcamRef.current &&
+      webcamRef.current.video &&
       webcamRef.current.video.readyState === 4 &&
       netRef.current
     ) {
-      const video = webcamRef.current.video;
+      const video = webcamRef.current.video as HTMLVideoElement;
       const videoWidth = video.videoWidth;
       const videoHeight = video.videoHeight;
 
