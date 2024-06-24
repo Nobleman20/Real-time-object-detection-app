@@ -1,0 +1,25 @@
+.photomenu {
+  width: 91px;
+  height: 71px;
+
+  p {
+    margin-top: 3px;
+    display: flex;
+    justify-content: center;
+    color: $body-color;
+    font-size: 10px;
+  }
+}
+
+.status {
+  display: flex;
+  margin-left: 70px;
+  margin-top: 5px;
+}
+
+.icon {
+  display: block;
+  margin-top: 0px auto;
+  text-align: center;
+  margin-left: 40px;
+}

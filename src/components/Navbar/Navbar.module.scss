@@ -45,3 +45,14 @@
 .timeleft {
   font-size: $small;
 }
+
+.eye {
+  width: 30px;
+  height: 30px;
+  background-color: $menu-background;
+  margin-left: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

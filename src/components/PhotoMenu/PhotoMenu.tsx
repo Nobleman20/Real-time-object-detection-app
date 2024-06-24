@@ -1,3 +1,5 @@
+import styles from "./PhotoMenu.module.scss";
+
 interface Props {
   feature: string;
   imgStatus: string;
@@ -8,9 +10,10 @@ interface Props {
 
 function PhotoMenu({ feature, imgIcon, imgStatus, altStatus, altIcon }: Props) {
   return (
-    <div>
-      <img src={imgStatus} alt={altStatus} />
-      <img src={imgIcon} alt={altIcon} />
+    <div className={styles.photomenu}>
+      <img src={imgStatus} alt={altStatus} className={styles.status} />
+
+      <img src={imgIcon} alt={altIcon} className={styles.icon} />
       <p>{feature}</p>
     </div>
   );
