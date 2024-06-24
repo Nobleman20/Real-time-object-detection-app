@@ -54,7 +54,7 @@ function MainPage() {
 
         const ctx = canvasRef.current.getContext("2d");
         if (ctx) {
-          drawRect(obj, ctx); // Pass obj and ctx to drawRect function
+          drawRect(obj, ctx);
         }
       }
     }
